@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
@@ -36,5 +37,35 @@ public class BankStatementProcessor {
             }
         }
         return total;
+    }
+
+    public double calculateMinAmount(final LocalDate firstDate, final LocalDate lastDate) {
+        double minAmount = Double.MAX_VALUE;
+
+        for (final BankTransaction bankTransaction: bankTransactions) {
+            LocalDate transactionDate = bankTransaction.getDate();
+            if (transactionDate.isEqual(firstDate) || (transactionDate.isAfter(firstDate) && transactionDate.isBefore(lastDate))){
+                if (bankTransaction.getAmount()<minAmount) {
+                    minAmount = bankTransaction.getAmount();
+                }
+            }
+        }
+
+        return minAmount;
+    }
+
+    public double calculateMaxAmount(final LocalDate firstDate, final LocalDate lastDate) {
+        double maxAmount = Double.MIN_VALUE;
+
+        for (final BankTransaction bankTransaction: bankTransactions) {
+            LocalDate transactionDate = bankTransaction.getDate();
+            if (transactionDate.isEqual(firstDate) || (transactionDate.isAfter(firstDate) && transactionDate.isBefore(lastDate))){
+                if (bankTransaction.getAmount() > maxAmount) {
+                    maxAmount = bankTransaction.getAmount();
+                }
+            }
+        }
+
+        return maxAmount;
     }
 }
