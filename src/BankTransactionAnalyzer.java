@@ -5,21 +5,17 @@ import java.nio.file.Paths;
 import java.time.Month;
 import java.util.List;
 
-public class BankTransactionAnalyzerSimple {
+public class BankTransactionAnalyzer {
     private static final String RESOURCES = "src/resources/";
-    private static final BankStatementCSVParser bankStatementCSVParser = new BankStatementCSVParser();
+    public void analyze(final String fileName, final BankStatementParser bankStatementParser) throws IOException {
 
-    public static void main(final String... args) throws IOException {
-
-        final String fileName = args[0];
-        final Path path = Paths.get(RESOURCES + args[0]);
+        final Path path = Paths.get(RESOURCES + fileName);
         final List<String> lines = Files.readAllLines(path);
 
-        List<BankTransaction> bankTransactions = bankStatementCSVParser.parseLinesFromCSV(lines);
+        List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);
         BankStatementProcessor bankStatementProcessor = new BankStatementProcessor(bankTransactions);
 
         collectSummary(bankStatementProcessor);
-
     }
 
     private static void collectSummary(final BankStatementProcessor bankStatementProcessor) {
