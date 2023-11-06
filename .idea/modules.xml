@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/account-analyzer.iml" filepath="$PROJECT_DIR$/account-analyzer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/account-analyzer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/account-analyzer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/account-analyzer.test.iml" filepath="$PROJECT_DIR$/.idea/modules/account-analyzer.test.iml" />
     </modules>
   </component>
 </project>

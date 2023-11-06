@@ -6,7 +6,7 @@ import java.time.Month;
 import java.util.List;
 
 public class BankTransactionAnalyzer {
-    private static final String RESOURCES = "src/resources/";
+    private static final String RESOURCES = "src/main/resources/";
     public void analyze(final String fileName, final BankStatementParser bankStatementParser) throws IOException {
 
         final Path path = Paths.get(RESOURCES + fileName);
