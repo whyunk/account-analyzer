@@ -8,7 +8,9 @@ public class MainApplication {
 
         final BankStatementParser bankStatementParser = new BankStatementCSVParser();
 
-        bankTransactionAnalyzer.analyze(args[0], bankStatementParser);
+        final Exporter exporter = new HtmlExporter();
+
+        bankTransactionAnalyzer.analyze(args[0], bankStatementParser, exporter);
 
     }
 }

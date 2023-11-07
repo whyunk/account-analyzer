@@ -8,14 +8,17 @@ import java.util.List;
 
 public class BankTransactionAnalyzer {
     private static final String RESOURCES = "src/main/resources/";
-    public void analyze(final String fileName, final BankStatementParser bankStatementParser) throws IOException {
+    public void analyze(final String fileName, final BankStatementParser bankStatementParser,final Exporter exporter) throws IOException {
 
         final Path path = Paths.get(RESOURCES + fileName);
         final List<String> lines = Files.readAllLines(path);
 
-        List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);
-        BankStatementProcessor bankStatementProcessor = new BankStatementProcessor(bankTransactions);
+        final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);
+        final BankStatementProcessor bankStatementProcessor = new BankStatementProcessor(bankTransactions);
 
+        final SummaryStatistics summaryStatistics = bankStatementProcessor.summarizeTransactions();
+
+        System.out.println(exporter.export(summaryStatistics));
         collectSummary(bankStatementProcessor);
     }
 
