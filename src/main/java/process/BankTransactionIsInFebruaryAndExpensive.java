@@ -1,3 +1,7 @@
+package process;
+
+import domain.BankTransaction;
+
 import java.time.Month;
 
 public class BankTransactionIsInFebruaryAndExpensive implements BankTransactionFilter {

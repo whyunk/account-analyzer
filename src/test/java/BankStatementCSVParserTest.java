@@ -1,11 +1,12 @@
+import domain.BankTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import parser.BankStatementCSVParser;
+import parser.BankStatementParser;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BankStatementCSVParserTest {
 
@@ -41,12 +42,12 @@ class BankStatementCSVParserTest {
                 new BankTransaction(LocalDate.of(2023, Month.JUNE,1), 5000, "salary");
         final double tolerance = 0;
 
-        //index 0  0f List<BankTransaction> that after parseLinesFrom()
+        //index 0  0f List<domain.BankTransaction> that after parseLinesFrom()
         Assertions.assertEquals(expected1.getDate(), result.get(0).getDate());
         Assertions.assertEquals(expected1.getAmount(), result.get(0).getAmount(), tolerance);
         Assertions.assertEquals(expected1.getDescription(), result.get(0).getDescription());
 
-        //index 1  0f List<BankTransaction> that after parseLinesFrom()
+        //index 1  0f List<domain.BankTransaction> that after parseLinesFrom()
         Assertions.assertEquals(expected2.getDate(), result.get(1).getDate());
         Assertions.assertEquals(expected2.getAmount(), result.get(1).getAmount(), tolerance);
         Assertions.assertEquals(expected2.getDescription(), result.get(1).getDescription());

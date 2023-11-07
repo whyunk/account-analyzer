@@ -1,3 +1,8 @@
+package process;
+
+import domain.BankTransaction;
+import domain.SummaryStatistics;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;

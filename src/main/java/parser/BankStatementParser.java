@@ -1,3 +1,7 @@
+package parser;
+
+import domain.BankTransaction;
+
 import java.util.List;
 
 public interface BankStatementParser {

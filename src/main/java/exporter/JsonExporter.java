@@ -1,3 +1,7 @@
+package exporter;
+
+import domain.SummaryStatistics;
+
 public class JsonExporter implements Exporter {
     @Override
     public String export(SummaryStatistics summaryStatistics) {

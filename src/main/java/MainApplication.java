@@ -1,3 +1,9 @@
+import exporter.Exporter;
+import exporter.JsonExporter;
+import parser.BankStatementCSVParser;
+import parser.BankStatementParser;
+import process.BankTransactionAnalyzer;
+
 import java.io.IOException;
 
 public class MainApplication {

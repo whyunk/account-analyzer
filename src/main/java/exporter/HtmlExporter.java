@@ -1,3 +1,7 @@
+package exporter;
+
+import domain.SummaryStatistics;
+
 public class HtmlExporter implements Exporter {
 
     @Override

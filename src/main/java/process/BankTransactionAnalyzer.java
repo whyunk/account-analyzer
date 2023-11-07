@@ -1,3 +1,10 @@
+package process;
+
+import domain.BankTransaction;
+import domain.SummaryStatistics;
+import exporter.Exporter;
+import parser.BankStatementParser;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,7 +15,7 @@ import java.util.List;
 
 public class BankTransactionAnalyzer {
     private static final String RESOURCES = "src/main/resources/";
-    public void analyze(final String fileName, final BankStatementParser bankStatementParser,final Exporter exporter) throws IOException {
+    public void analyze(final String fileName, final BankStatementParser bankStatementParser, final Exporter exporter) throws IOException {
 
         final Path path = Paths.get(RESOURCES + fileName);
         final List<String> lines = Files.readAllLines(path);
