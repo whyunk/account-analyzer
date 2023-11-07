@@ -11,33 +11,30 @@ public class BankStatementProcessor {
         this.bankTransactions = bankTransactions;
     }
 
+    public double summarizeTransactions(final BankTransactionSummarizer bankTransactionSummarizer) {
+        double result = 0;
+        for (final BankTransaction bankTransaction: bankTransactions) {
+            result = bankTransactionSummarizer.summarize(result, bankTransaction);
+        }
+
+        return result;
+    }
+
     public double calculateTotalAmount() {
 
-        double total = 0;
-        for (final BankTransaction bankTransaction: bankTransactions) {
-            total += bankTransaction.getAmount();
-        }
-        return total;
+        return summarizeTransactions(((accumulator, bankTransaction) -> accumulator + bankTransaction.getAmount()));
     }
 
     public double calculateTotalInMonth(final Month month) {
-        double total = 0;
-        for (final BankTransaction bankTransaction: bankTransactions) {
-            if(bankTransaction.getDate().getMonth() == month) {
-                total += bankTransaction.getAmount();
-            }
-        }
-        return total;
+
+        return summarizeTransactions(((accumulator, bankTransaction) ->
+                bankTransaction.getDate().getMonth() == month ? accumulator + bankTransaction.getAmount() : accumulator));
     }
 
     public double calculateTotalForCategory(final String category) {
-        double total  = 0;
-        for (final BankTransaction bankTransaction: bankTransactions) {
-            if (bankTransaction.getDescription().equals(category)) {
-                total += bankTransaction.getAmount();
-            }
-        }
-        return total;
+
+        return summarizeTransactions(((accumulator, bankTransaction) ->
+                bankTransaction.getDescription().equals(category) ? accumulator + bankTransaction.getAmount() : accumulator));
     }
 
     public double calculateMinAmount(final LocalDate firstDate, final LocalDate lastDate) {
@@ -83,38 +80,17 @@ public class BankStatementProcessor {
     }
 
     public List<BankTransaction> findTransactionsGreaterThanEqual(final int amount) {
-        final List<BankTransaction> result = new ArrayList<>();
 
-        for (final BankTransaction bankTransaction: bankTransactions) {
-            if (bankTransaction.getAmount() >= amount) {
-                result.add(bankTransaction);
-            }
-        }
-
-        return result;
+        return findTransactions(bankTransaction -> bankTransaction.getAmount() >= amount);
     }
 
     public List<BankTransaction> findTransactionsInMonth(final Month month) {
-        final List<BankTransaction> result = new ArrayList<>();
 
-        for (final BankTransaction bankTransaction: bankTransactions) {
-            if (bankTransaction.getDate().getMonth() == month) {
-                result.add(bankTransaction);
-            }
-        }
-
-        return result;
+        return findTransactions(bankTransaction -> bankTransaction.getDate().getMonth() == month);
     }
 
     public List<BankTransaction> findTransactionsInMonthAndGreater(final Month month, final int amount) {
-        final List<BankTransaction> result = new ArrayList<>();
 
-        for (final BankTransaction bankTransaction: bankTransactions) {
-            if (bankTransaction.getDate().getMonth() == month && bankTransaction.getAmount() >= amount) {
-                result.add(bankTransaction);
-            }
-        }
-
-        return result;
+        return findTransactions(bankTransaction -> bankTransaction.getDate().getMonth() == month && bankTransaction.getAmount() >= amount);
     }
 }
